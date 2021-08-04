@@ -11,6 +11,7 @@ function App() {
   return (
     <div>
       Resilia Notifications
+      {notifications.map(notification => <p>{notification.message}</p>)}
     </div>
   );
 }
