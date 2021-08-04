@@ -4,7 +4,7 @@ function Notification (props ) {
     return (
         <div>
             <p>{props.message}</p>
-            <button>CLOSE</button>
+            {/* <button>CLOSE</button> */}
         </div>
     )
 }

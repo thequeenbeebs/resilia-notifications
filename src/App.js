@@ -3,6 +3,7 @@ import Notification from './Notification'
 
 function App() {
   const [notifications, setNotifications] = useState([])
+  const [user, setUser] = useState(['Blaire'])
 
   useEffect(() => {
     fetch('http://localhost:3000/notifications')
