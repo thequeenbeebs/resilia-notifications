@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Notification (props ) {
+function Notification ( { notification, deleteNotification} ) {
     return (
         <div>
-            <p>{props.message}</p>
-            {/* <button>CLOSE</button> */}
+            <p>{notification.message}</p>
+            <button onClick={() => deleteNotification(notification)}>CLOSE</button>
         </div>
     )
 }
