@@ -16,15 +16,27 @@ function App() {
           name: user
         })
 
-    fetch('http://localhost:3000/notifications', reqPack)
+    if (localStorage.getItem('notifications')) {
+      setNotifications(JSON.parse(localStorage.notifications))
+    } else {
+      fetch('http://localhost:3000/notifications', reqPack)
       .then(resp => resp.json())
-      .then(notes => setNotifications(notes))
+      .then(notes => {
+        setNotifications(notes)
+        localStorage.setItem('notifications', JSON.stringify(notes))
+      })
+    }
+    
   }, [])
+
+  
 
   let deleteNotification = (notification) => {
     fetch(`http://localhost:3000/notifications/${notification.id}`, {method: 'DELETE'})
     
-    setNotifications(notifications.filter(n => n.id !== notification.id))
+    let updated = notifications.filter(n => n.id !== notification.id)
+    setNotifications(updated)
+    localStorage.setItem('notifications', JSON.stringify(updated))
   }
 
   return (

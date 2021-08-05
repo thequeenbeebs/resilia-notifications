@@ -1,4 +1,6 @@
+Current Goals:
+* Implement local storage
+
 Future Goals:
-* Enter username to see notifications, saved in local storage
+* Enter username to see notifications
 * Using Authentication and a login rather than just hard coding a user
-* Close button, which also removes notification from backend
