@@ -3,7 +3,7 @@ import Notification from './Notification'
 
 function App() {
   const [notifications, setNotifications] = useState([])
-  const [user, setUser] = useState('Blaire') // currently hard coded
+  const [user, setUser] = useState('Dinesh') // currently hard coded
 
   useEffect(() => {
     if (localStorage.getItem('notifications')) {
