@@ -4,6 +4,7 @@ import Notification from './Notification'
 function App() {
   const [notifications, setNotifications] = useState([])
   const [user, setUser] = useState('Dinesh') // currently hard coded
+  //user.notifications
 
   useEffect(() => {
     if (localStorage.getItem('notifications')) {
