@@ -13,6 +13,7 @@
 * Front-end: JavaScript/React 
 * Back-end: Ruby on Rails
 * Database: PostgresQL
+* Testing: Jest and Enzyme
 
 ## Requirements
 * frontend should request notifications from an API (fetch request from resilia-api)
