@@ -6,7 +6,13 @@ function App() {
   const [user, setUser] = useState('Blaire') // currently hard coded
 
   useEffect(() => {
-    let reqPack = {}
+    if (localStorage.getItem('notifications')) {
+
+      setNotifications(JSON.parse(localStorage.notifications))
+
+    } else {
+
+      let reqPack = {}
         reqPack.method = "POST"
         reqPack.headers = {
           "Content-Type": "application/json",
@@ -16,9 +22,6 @@ function App() {
           name: user
         })
 
-    if (localStorage.getItem('notifications')) {
-      setNotifications(JSON.parse(localStorage.notifications))
-    } else {
       fetch('http://localhost:3000/notifications', reqPack)
       .then(resp => resp.json())
       .then(notes => {
@@ -29,8 +32,6 @@ function App() {
     
   }, [])
 
-  
-
   let deleteNotification = (notification) => {
     fetch(`http://localhost:3000/notifications/${notification.id}`, {method: 'DELETE'})
     
@@ -40,11 +41,15 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>Welcome, {user}!</h1>
-      <h2>Notifications</h2>
-      {notifications.map(notification => <Notification key={notification.id} notification={notification} deleteNotification={deleteNotification}/>)}
-    </div>
+    <>
+      <img className="header" src="//images.squarespace-cdn.com/content/v1/5e45fd7b05ae4e3f2f2ed60f/1581645908407-OU71JDZN3L0QV38JKDGQ/Resilia_Final_FullColor.jpg?format=1500w" alt="Resilia"></img>
+      <main>
+        <h3>Welcome, {user}!</h3>
+        <h2 className="center">Notifications</h2>
+        {notifications.map(notification => <Notification key={notification.id} notification={notification} deleteNotification={deleteNotification}/>)}
+      </main>
+      
+    </>
   );
 }
 

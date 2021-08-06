@@ -1,4 +1,5 @@
 # RESILIA NOTIFICATIONS
+### Blaire Baker
 
 ## Installation Instructions
 * Clone both this repo and the backend (https://github.com/thequeenbeebs/resilia-api) onto your computer
@@ -22,5 +23,5 @@
 ## Future Goals
 * Enter username to see notifications
 * Using Authentication and a login rather than just hard coding a user
-* Styling
 * Testing
+* Use custom React component for notifications 
