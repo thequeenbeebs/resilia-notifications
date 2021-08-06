@@ -21,7 +21,6 @@
 * notification​ objects contain arbitrary domain data along with attributes that allow it to function as a “notification” a user is intended to receive (notification model has message attribute, along with user_id that it belongs to)
 
 ## Future Goals
-* Enter username to see notifications
 * Using Authentication and a login rather than just hard coding a user
 * Testing
 * Use custom React component for notifications 
