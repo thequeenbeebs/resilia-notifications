@@ -1,53 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import Notification from './Notification'
+import Notification from './components/Notification';
+import Profile from './components/Profile';
 
 function App() {
-  const [notifications, setNotifications] = useState([])
-  const [user, setUser] = useState('Dinesh') // currently hard coded
-  //user.notifications
+  const [userData, setUserData] = useState({})
+  const [userId, setId] = useState(3) // currently hard coded
 
   useEffect(() => {
-    if (localStorage.getItem('notifications')) {
-
-      setNotifications(JSON.parse(localStorage.notifications))
-
+    if (localStorage.getItem('userData')) {
+      setUserData(JSON.parse(localStorage.userData))
     } else {
-
-      let reqPack = {}
-        reqPack.method = "POST"
-        reqPack.headers = {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        }
-        reqPack.body = JSON.stringify({
-          name: user
-        })
-
-      fetch('http://localhost:3000/notifications', reqPack)
+      fetch(`http://localhost:3000/users/${userId}`)
       .then(resp => resp.json())
-      .then(notes => {
-        setNotifications(notes)
-        localStorage.setItem('notifications', JSON.stringify(notes))
+      .then(data => {
+        setUserData(data)
+        localStorage.setItem('userData', JSON.stringify(data))
       })
     }
-    
   }, [])
 
   let deleteNotification = (notification) => {
-    fetch(`http://localhost:3000/notifications/${notification.id}`, {method: 'DELETE'})
+    fetch(`http://localhost:3000/user_notifications/${notification.id}`, {method: 'DELETE'})
     
-    let updated = notifications.filter(n => n.id !== notification.id)
-    setNotifications(updated)
-    localStorage.setItem('notifications', JSON.stringify(updated))
+    let updated = {
+      ...userData,
+      notifications: userData.notifications.filter(n => n.id !== notification.id)
+    }
+    setUserData(updated)
+    localStorage.setItem('userData', JSON.stringify(updated))
   }
 
   return (
     <>
       <img className="header" src="//images.squarespace-cdn.com/content/v1/5e45fd7b05ae4e3f2f2ed60f/1581645908407-OU71JDZN3L0QV38JKDGQ/Resilia_Final_FullColor.jpg?format=1500w" alt="Resilia"></img>
       <main>
-        <h3>Welcome, {user}!</h3>
-        <h2 className="center">Notifications</h2>
-        {notifications.map(notification => <Notification key={notification.id} notification={notification} deleteNotification={deleteNotification}/>)}
+        <Profile user={userData}/>
+        <div>
+          <h2 className="center">Notifications</h2>
+          {userData.notifications ? userData.notifications.map(notification => <Notification key={notification.id} notification={notification} deleteNotification={deleteNotification}/>) : null }
+        </div>
       </main>
       
     </>
